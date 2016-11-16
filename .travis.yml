@@ -1,0 +1,8 @@
+language: ruby
+rvm:
+  - 2.0
+  - 2.1
+  - 2.2
+script:
+  - bundle exec rubocop -d -l --only Performance
+  - bundle exec rake test
