@@ -21,7 +21,13 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
-require_relative 'stadium/engine.rb'
+require 'stadium/mock.rb'
+
+
+require 'stadium/engine.rb'
+require 'stadium/router.rb'
+require 'stadium/queue_pair.rb'
+
 module Stadium
     
 end

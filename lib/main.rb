@@ -22,6 +22,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-require_relative 'stadium'
+require 'stadium'
+
 engine = Stadium::Engine.new();
 engine.run();
