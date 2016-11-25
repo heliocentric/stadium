@@ -33,6 +33,7 @@ module Stadium
 		def run
 			endflag = false;
 			while (endflag != true)
+				puts "Test"
 				sleep 0.1
 			end
 		end
