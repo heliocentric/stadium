@@ -32,7 +32,7 @@ module Stadium
 		end
 		def run
 			while (1 == 2)
-				
+				sleep 0.1
 			end
 		end
 	end
