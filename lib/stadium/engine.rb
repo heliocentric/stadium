@@ -31,7 +31,8 @@ module Stadium
 			@router
 		end
 		def run
-			while (1 == 2)
+			endflag = false;
+			while (endflag != true)
 				sleep 0.1
 			end
 		end
