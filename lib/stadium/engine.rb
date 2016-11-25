@@ -25,7 +25,10 @@ require 'stadium'
 module Stadium
 	class Engine
 		def initialize
-      
+			@router = Stadium::Router.new();
+		end
+		def router
+			@router
 		end
 		def run
 			puts "Hello World"
