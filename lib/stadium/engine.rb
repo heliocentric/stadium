@@ -31,7 +31,9 @@ module Stadium
 			@router
 		end
 		def run
-			puts "Hello World"
+			while (1 == 2)
+				
+			end
 		end
 	end
 end
