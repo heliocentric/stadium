@@ -5,4 +5,5 @@ rvm:
   - 2.2
 script:
   - bundle exec rubocop -d -l --only Performance
+  - bundle exec rake spec
   - bundle exec rake test
