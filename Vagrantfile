@@ -1,21 +1,85 @@
-
+# vim: set ft=ruby:
 Vagrant.configure(2) do |config|
-  config.ssh.insert_key = false
-  config.vm.box = "puppetlabs/centos-7.0-64-puppet"
-  config.vm.hostname = "stadium"
-  config.vm.provider "virtualbox" do |v|
-    v.cpus = 2
-    v.memory = 2048
-  end
-  config.vm.network "forwarded_port", guest: 8500, host: 8500
-  config.vm.network "forwarded_port", guest: 5672, host: 5672
-  config.vm.network "forwarded_port", guest: 15672, host: 15672
-  config.vm.network "forwarded_port", guest: 8901, host: 8901
-   config.vm.provision "shell", inline: <<-SHELL
-	cd /vagrant/puppet
-	sudo /opt/puppetlabs/bin/puppet module install stahnma-epel --version 1.2.2
-	sudo /opt/puppetlabs/bin/puppet module install garethr-docker --version 5.3.0
-	sudo /opt/puppetlabs/bin/puppet apply main.pp
-	cd /vagrant
-   SHELL
+	ENV['VAGRANT_DEFAULT_PROVIDER'] = 'docker'
+	ENV['VAGRANT_NO_PARALLEL'] = 'yes'
+	config.vm.define "consul" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.image = "consul"
+			d.has_ssh = false
+			d.ports = [
+				"8500:8500",
+			]
+		end
+	end
+	config.vm.define "registrator" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.image = "gliderlabs/registrator"
+			d.has_ssh = false
+			d.create_args = [
+				"--net=host",
+				"--volume=/var/run/docker.sock:/tmp/docker.sock"
+			]
+			d.cmd = [
+				"-internal=true",
+				"consul://localhost:8500",
+			]
+		end
+	end
+	config.vm.define "rabbitmq" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.image = "rabbitmq:3-management"
+			d.has_ssh = false
+			d.ports = [
+				"5672:5672",
+				"15672:15672",
+				"61613:61613",
+			]
+		end
+	end
+	config.vm.define "postgres" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.image = "postgres"
+			d.has_ssh = false
+			d.ports = [
+				"5432:5432",
+			]
+		end
+	end
+	config.vm.define "elasticsearch" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.image = "elasticsearch:5.1"
+			d.has_ssh = false
+			d.ports = [
+				"9200:9200",
+			]
+		end
+	end
+	config.vm.define "stadium" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.build_dir = "."
+			d.has_ssh = false
+		end
+	end
+	vagrant_root = File.dirname(__FILE__);
+	config.vm.define "test" do |config|
+		config.vm.synced_folder ".", "/vagrant", disabled: true
+		config.vm.provider "docker" do |d|
+			d.build_dir = "./ssh-host"
+			d.has_ssh = true
+			d.volumes = [
+				"#{vagrant_root}:/vagrant:z",
+			]
+		end
+		config.vm.provision "shell", inline: <<-SCRIPT
+			cd /vagrant
+			bundle install
+		SCRIPT
+	
+	end
 end

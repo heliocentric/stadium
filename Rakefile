@@ -45,7 +45,7 @@ end
 Rake::TestTask.new do |t|
 	t.test_files = FileList['test/**/*.rb']
 end
-
+sh("bundle install")
 RSpec::Core::RakeTask.new do |spec|
 	spec.pattern = 'spec/*_spec.rb'
 	spec.rspec_opts = [Dir["lib"].to_a.join(':')]

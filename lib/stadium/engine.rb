@@ -31,10 +31,12 @@ module Stadium
 			@router
 		end
 		def run
+			count=0
 			endflag = false;
 			while (endflag != true)
-				puts "Test"
-				sleep 0.1
+				count = count + 1;
+				puts "Test #{count}";
+				sleep 0.1;
 			end
 		end
 	end

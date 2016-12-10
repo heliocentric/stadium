@@ -22,11 +22,10 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-require 'engine'
 
-describe Engine do
+describe Stadium::Engine do
 	before(:each) do
-		@engine = Engine.new
+		@engine = Stadium::Engine.new
 	end
 
 	it "should desc" do

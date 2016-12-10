@@ -1,0 +1,8 @@
+test-ruby-21:
+        image: ruby:2.1
+        stage: test
+        script:
+                - bundle install
+                - bundle exec rubocop -d -l --only Performance
+                - bundle exec rake spec
+                - bundle exec rake test
