@@ -14,7 +14,9 @@ GEM
     docile (1.1.5)
     faraday (0.10.0)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.14-java)
     json (2.0.2)
+    json (2.0.2-java)
     method_source (0.8.2)
     multipart-post (2.0.0)
     parser (2.3.3.1)
@@ -24,6 +26,11 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry (0.10.4-java)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+      spoon (~> 0.0)
     pry-byebug (3.4.2)
       byebug (~> 9.0)
       pry (~> 0.10)
@@ -55,9 +62,12 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
+    spoon (0.0.6)
+      ffi
     unicode-display_width (1.1.2)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
