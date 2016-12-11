@@ -7,7 +7,7 @@ gem 'simplecov', :require => false, :group => :test
 # Stadium gems
 gem 'diplomat', '~> 0.17.0'
 if (/jruby/ =~ RUBY_PLATFORM)
-	gem 'march_hare', '~> 2.16'
+	gem 'march_hare', '= 2.16'
 else
 	gem 'pry'
 	gem 'pry-byebug'
