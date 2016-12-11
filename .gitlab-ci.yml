@@ -22,11 +22,11 @@ test-ruby-23:
                 - bundle exec rubocop -d -l --only Performance
                 - bundle exec rake spec
                 - bundle exec rake test
-test-jruby-17:
-        image: jruby:1.7
-        stage: test
-        script:
-                - bundle install
-                - bundle exec rubocop -d -l --only Performance
-                - bundle exec rake spec
-                - bundle exec rake test
+# test-jruby-17:
+#         image: jruby:1.7
+#         stage: test
+#         script:
+#                 - bundle install
+#                 - bundle exec rubocop -d -l --only Performance
+#                 - bundle exec rake spec
+#                 - bundle exec rake test
